@@ -1,0 +1,22 @@
+# Sensitive local config
+.env
+.env.*
+
+# Cookies / auth dumps
+cookies.txt
+*.cookies.txt
+*.netscape.txt
+
+# Sessions
+*.session
+*.session-journal
+
+# Databases
+*.db
+*.db-shm
+*.db-wal
+
+# Python cache
+__pycache__/
+*.pyc
+.venv/

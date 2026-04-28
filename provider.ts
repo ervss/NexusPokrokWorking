@@ -1,0 +1,80 @@
+export const provider = {
+  "site": "www.pornhat.com",
+  "name": "pornhat-com",
+  "startUrl": "https://www.pornhat.com/sites/vip-4k/",
+  "container": "div.item.thumb-bl",
+  "fields": {
+    "title": "div.wrapper.pintour:nth-of-type(4) > div:nth-of-type(3) > div.list_video_wrapper:nth-of-type(1) > div.item.thumb-bl:nth-of-type(1) > div.thumb-bl-info:nth-of-type(2) > div.content_items > a:nth-of-type(2)",
+    "thumbnail": "div.wrapper.pintour:nth-of-type(4) > div:nth-of-type(3) > div.list_video_wrapper:nth-of-type(1) > div.item.thumb-bl:nth-of-type(1) > div.thumb.thumb-video:nth-of-type(1) > a > img.thumb.lazy-load",
+    "detailUrl": "div.wrapper.pintour:nth-of-type(4) > div:nth-of-type(3) > div.list_video_wrapper:nth-of-type(1) > div.item.thumb-bl:nth-of-type(1) > div.thumb.thumb-video:nth-of-type(1) > a",
+    "duration": ".duration",
+    "quality": ".quality"
+  },
+  "pagination": {
+    "selector": "div.age-popup:nth-of-type(1) > div.modal > div.modal-dialog.modal-dialog-centered > div.modal-content.p-3 > div > div.modal-body:nth-of-type(2) > p:nth-of-type(2) > a",
+    "type": "button"
+  },
+  "samples": [
+    {
+      "title": "Hot Pearl",
+      "thumbnail": "https://static.pornhat.com/contents/videos_screenshots/733000/733355/640x360/1.jpg",
+      "detailUrl": "https://www.pornhat.com/video/hot-pearl-s-hot-smut-by-vip-4k/",
+      "duration": "5:56",
+      "quality": "4K"
+    },
+    {
+      "title": "21 hours ago",
+      "thumbnail": "https://static.pornhat.com/contents/videos_screenshots/730000/730589/640x360/1.jpg",
+      "detailUrl": "https://www.pornhat.com/video/mommy-4k-milf-porn/",
+      "duration": "10:00",
+      "quality": "4K"
+    },
+    {
+      "title": "2 days ago",
+      "thumbnail": "https://static.pornhat.com/contents/videos_screenshots/731000/731503/640x360/1.jpg",
+      "detailUrl": "https://www.pornhat.com/video/romantic-steve-s-czech-trailer/",
+      "duration": "6:22",
+      "quality": "4K"
+    },
+    {
+      "title": "3 days ago",
+      "thumbnail": "https://static.pornhat.com/contents/videos_screenshots/731000/731512/640x360/1.jpg",
+      "detailUrl": "https://www.pornhat.com/video/stanley-johnson-s-hot-and-sexy-sex-by-vip-4k/",
+      "duration": "15:15",
+      "quality": "4K"
+    },
+    {
+      "title": "4 days ago",
+      "thumbnail": "https://static.pornhat.com/contents/videos_screenshots/733000/733010/640x360/1.jpg",
+      "detailUrl": "https://www.pornhat.com/video/enticing-alex-romero-at-beautiful-girl-scene/",
+      "duration": "32:06",
+      "quality": "4K"
+    },
+    {
+      "title": "Carlo Duro",
+      "thumbnail": "https://static.pornhat.com/contents/videos_screenshots/733000/733354/640x360/1.jpg",
+      "detailUrl": "https://www.pornhat.com/video/carlo-s-weird-action/",
+      "duration": "15:21",
+      "quality": "4K"
+    }
+  ]
+} as const;
+
+export function buildPageUrl(baseUrl: string, page: number): string {
+  const pagination = provider.pagination;
+  if (!pagination || pagination.type === 'unknown') return baseUrl;
+
+  if (pagination.type === 'query' && pagination.pattern) {
+    const url = new URL(baseUrl);
+    url.searchParams.set('page', String(page));
+    return url.toString();
+  }
+
+  if (pagination.type === 'path' && pagination.pattern) {
+    if (/\/page\/\{n\}$/i.test(pagination.pattern) || /\/page\/\{n\}\/?$/i.test(pagination.pattern)) {
+      return baseUrl.replace(/\/?$/, '') + '/page/' + page;
+    }
+  }
+
+  return baseUrl;
+}

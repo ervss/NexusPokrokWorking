@@ -1,0 +1,14 @@
+{
+  "name": "nexus-mcp-server",
+  "version": "1.0.0",
+  "description": "Local MCP server for Nexus-Pokrok project",
+  "main": "index.mjs",
+  "type": "module",
+  "scripts": {
+    "start": "node index.mjs"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.0.0",
+    "axios": "^1.6.0"
+  }
+}
